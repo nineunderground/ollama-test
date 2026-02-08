@@ -3,9 +3,11 @@ services:
     image: ollama/ollama:latest
     container_name: ollama-test
     ports:
-      - "11434:11434"
+      - "0.0.0.0:11434:11434"  # Bind to all interfaces for network access
     volumes:
       - ollama_data:/root/.ollama
+    environment:
+      - OLLAMA_HOST=0.0.0.0:11434  # Allow connections from any IP
     restart: unless-stopped
 
 volumes:
